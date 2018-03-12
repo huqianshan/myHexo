@@ -7,3 +7,5 @@ public/
 .deploy*/
 *~
 landscape/
+*.ink
+*.Ink
