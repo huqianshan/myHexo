@@ -2,7 +2,6 @@
 title: 薅资本主义的羊毛，利用GitHub搭建一个hexo博客
 date: 2018-02-03 22：25
 tags: [hexo,GitHub]
-search: true
 ---
 
 ------
