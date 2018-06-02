@@ -6,16 +6,12 @@ tags: [hexo,GitHub]
 
 ------
 
-
-
 > * 安装 node.js Git
 > * 创建GitHub仓库，关联ssh key
 > * 安装hexo 搭建本地博客
 > * 克隆主题样式，修改整站配置文件
 > * 撰写博文 1. 创建文件 2. 使用MarkDown语法编辑
 > * 部署博客至GitHub 
-
-
 
 ------
 
