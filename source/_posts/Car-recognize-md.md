@@ -31,7 +31,7 @@ tags: [TensorFlow,CNN,Python,UESTC]
 1. [百度图库爬虫模块](https://huqianshan.github.io/baidu-spider/)；
 2. [卷积神经网络模块](https://huqianshan.github.io/model/)
 3. [图形界面展示模块](https://huqianshan.github.io/model/#GUI%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2)
-
+<!--more-->
 #### 摘要
 
 
