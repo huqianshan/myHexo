@@ -75,7 +75,6 @@ per_page: 8
 pagination_dir: page
 
 # Disqus
-disqus_shortname:
 disqus_shortname: huqianshan
 # Extensions
 ## Plugins:   
