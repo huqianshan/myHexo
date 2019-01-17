@@ -115,7 +115,7 @@ feed:
     type: atom
     path: atom.xml
     limit: 100
-
+avatar: https://i.pinimg.com/564x/7c/ed/66/7ced66d73db6807ae9edc4edf5cadcf4.jpg
 
 jsonContent:
   meta: false
@@ -124,9 +124,9 @@ jsonContent:
     title: true
     date: true
     path: true
-    text: false
-    raw: false
-    content: false
+    text: true
+    raw: true
+    content: true
     slug: false
     updated: false
     comments: false

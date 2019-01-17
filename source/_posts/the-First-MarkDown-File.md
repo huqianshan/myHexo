@@ -14,7 +14,7 @@ tags: [hexo,GitHub]
 > * 部署博客至GitHub 
 
 ------
-
+<!--more-->
 
 ![cmd-markdown-logo](https://cloud.githubusercontent.com/assets/2175271/19885143/62e9269c-a01d-11e6-8e26-e36a36201d88.png)
 
