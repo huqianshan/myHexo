@@ -3,5 +3,10 @@
        "name":"Blog of hexo",
        "url":"https://github.com/huqianshan/huqianshan.github.io",
        "desc":"A fast, simple & powerful blog"
+    },
+    {
+        "name":"CSAPP3e & CMU15-213 Study Plan",
+        "url":"https://github.com/huqianshan/CSAPP-LAB",
+        "desc":"The Lab of 15-213"
     }
 ]
