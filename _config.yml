@@ -76,9 +76,9 @@ pagination_dir: page
 
 # Disqus
 disqus_shortname:
-
+disqus_shortname: huqianshan
 # Extensions
-## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
+## Plugins:   
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
 # plugins:
 #  - hexo-generator-feed
@@ -115,7 +115,7 @@ feed:
     type: atom
     path: atom.xml
     limit: 100
-avatar: https://i.pinimg.com/564x/7c/ed/66/7ced66d73db6807ae9edc4edf5cadcf4.jpg
+
 
 jsonContent:
   meta: false
