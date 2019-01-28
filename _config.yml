@@ -75,7 +75,7 @@ per_page: 8
 pagination_dir: page
 
 # Disqus
-disqus_shortname: huqianshan
+#disqus_shortname: huqianshan
 # Extensions
 ## Plugins:   
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
@@ -84,7 +84,7 @@ disqus_shortname: huqianshan
 #  - hexo-generator-baidu-sitemap
 #  - hexo-generator-sitemap
 
-theme: yilia
+theme: amber
 exclude_generator:
 
 # Deployment
