@@ -12,7 +12,7 @@ tags:
 - 参数配置
 - 爬虫框架
 - 存储模块
-
+<!--more-->
 ## 读取链接
 
 ### 1.1 从文档从直接读取目标url
@@ -31,6 +31,39 @@ tags:
   ```
 
   `说明:`  输入 `name`文件名; 输出 `dic` 以列表形式的url;
+
+## 解析链接
+
+### 2.1 获取资源格式类型
+
+```python
+import re
+def get_suffix(name):
+    m = re.search(r'\.[^\.]*$', name)
+    if m.group(0) and len(m.group(0)) <= 5:
+        return m.group(0)
+    else:
+        return '.jpg'
+```
+
+`说明` 当链接url`name`中的最后一个`.`的匹配存在 且小于5个字母，则匹配成功 
+        否则默认为`.jpg`
+
+### 2.2 直接获取文件名及后缀名
+
+#### a `split`方法
+
+```python
+def get_name_suffix(name):
+    return name.split('/')[-1]
+```
+
+#### b `os.path`方法
+
+```python
+def get_os_name_suffix(name):
+    return os.path.basename(name)
+```
 
 ## 参数配置
 
@@ -146,3 +179,22 @@ if __name__ == '__main__':
     crawler.start('urls_drawings',1000,102)
 ```
 
+## 存储模块
+
+### 5.1 存储文件
+
+```python
+def save_image(self, url,rsp_data, word):
+    # if directory not exists
+    if not os.path.exists("./" + word):
+        os.mkdir("./" + word)
+    # current existed file number
+    self.__counter = len(os.listdir('./' + word)) + 1  
+    time.sleep(self.time_sleep)
+    # get file name
+    name="./"+word+"/"+str(self.__counter)+get_suffix(url)
+    with open(name, 'wb') as file:
+        file.write(rsp_data) 
+    print("图+1,已有" + str(self.__counter) + "张图片")
+    return
+```
