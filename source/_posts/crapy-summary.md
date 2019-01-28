@@ -12,8 +12,9 @@ tags:
 - 参数配置
 - 爬虫框架
 - 存储模块
+
 <!--more-->
-![ba93659578d934af93a9411dd6735931.gif](https://i.loli.net/2019/01/28/5c4f0f52a4f45.gif)
+
 ## 读取链接
 
 ### 1.1 从文档从直接读取目标url
@@ -33,7 +34,7 @@ tags:
 
   `说明:`  输入 `name`文件名; 输出 `dic` 以列表形式的url;
 
-## 解析链接
+## 解析链接`urllib.parse`
 
 ### 2.1 获取资源格式类型
 
@@ -62,6 +63,7 @@ def get_name_suffix(name):
 #### b `os.path`方法
 
 ```python
+import os
 def get_os_name_suffix(name):
     return os.path.basename(name)
 ```
@@ -199,3 +201,5 @@ def save_image(self, url,rsp_data, word):
     print("图+1,已有" + str(self.__counter) + "张图片")
     return
 ```
+
+![ba93659578d934af93a9411dd6735931.gif](https://i.loli.net/2019/01/28/5c4f0f52a4f45.gif)
