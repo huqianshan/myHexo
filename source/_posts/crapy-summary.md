@@ -102,6 +102,26 @@ def get_os_name_suffix(name):
     return random.choice(user_agent)
   ```
 
+### 3.2 `Cookie`和`timeout`
+
+```python
+jar = requests.cookies.RequestsCookieJar()
+jar.set('tasty_cookie', 'yum', domain='httpbin.org', path='/cookies')
+r = requests.get(url, cookies=jar)
+```
+
+`Cookie` 的返回对象为 `RequestsCookieJar`，它的行为和字典类似，但接口更为完整，适合跨域名跨路径使用。你还可以把 `Cookie Jar` 传到 `Requests` 中.
+
+也可以直接生成字典`dict(status='value')` 传递给`requests`
+
+```python
+requests.get('http://github.com', timeout=0.001)
+```
+
+`说明：`  requests 在经过以 timeout 参数设定的秒数时间之后停止等待响应。基本上所有的生产代码都应该使用这一参数。如果不使用，你的程序可能会永远失去响应：
+
+>timeout 仅对连接过程有效，与响应体的下载无关。 timeout 并不是整个下载响应的时间限制，而是如果服务器在 timeout 秒内没有应答，将会引发一个异常（更精确地说，是在 timeout 秒内没有从基础套接字上接收到任何字节的数据时）If no timeout is specified explicitly, requests do not time out.
+
 ## 爬虫框架
 
 ### 4.1 `class` 类框架
@@ -212,6 +232,20 @@ with open(filename, 'wb') as fd:
     for chunk in r.iter_content(chunk_size):
         fd.write(chunk)
 ```
+
+`说明：`  默认情况下，发起请求会同时下载响应头和响应体（就是响应内容）
+
+如果将stream=True 则会推迟响应内容的下载
+
+这里就是：满足某种条件才去下载
+
+```python
+if int(r.headers['content-length']) < TOO_LONG:
+
+    content = r.content
+```
+
+在请求中把 stream 设为 True，Requests 无法将连接释放回连接池,除非消耗了所有的数据，或者调用了 Response.close。这样会带来连接效率低下的问题。如果在使用 stream=True 的同时还在部分读取请求的 body（或者完全没有读取 body），那么就应该使用 with 语句发送请求，这样可以保证请求一定会被关闭
 
 ## 辅助模块
 
