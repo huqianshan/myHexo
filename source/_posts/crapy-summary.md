@@ -12,6 +12,7 @@ tags:
 - 参数配置
 - 爬虫框架
 - 存储模块
+- 辅助模块
 
 <!--more-->
 
@@ -201,5 +202,28 @@ def save_image(self, url,rsp_data, word):
     print("图+1,已有" + str(self.__counter) + "张图片")
     return
 ```
+
+### 5.2 原始套接字响应内容
+
+```python
+# must set stream=true
+r = requests.get('https://api.github.com/events', stream=True)
+with open(filename, 'wb') as fd:
+    for chunk in r.iter_content(chunk_size):
+        fd.write(chunk)
+```
+
+## 辅助模块
+
+### 6.1 `PIL`和`IO`库
+
+```python
+from PIL import Image
+from io import BytesIO
+
+i = Image.open(BytesIO(r.content))
+```
+
+`说明：` 以请求返回的二进制数据`r.content`创建一张图片，你可以使用如上代码
 
 ![ba93659578d934af93a9411dd6735931.gif](https://i.loli.net/2019/01/28/5c4f0f52a4f45.gif)
