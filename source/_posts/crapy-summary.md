@@ -203,6 +203,31 @@ if __name__ == '__main__':
     crawler.start('urls_drawings',1000,102)
 ```
 
+### 4.2 `Session`会话
+
+```python
+session = requests.Session()
+session.headers.update({'x-test': 'true'})
+```
+
+`说明:`会话对象让你能够跨请求保持某些参数。它也会在同一个 Session 实例发出的所有请求之间保持 cookie， 期间使用 urllib3 的 connection pooling 功能。所以如果你向同一主机发送多个请求，底层的 TCP 连接将会被重用，从而带来显著的性能提升。
+
+任何你传递给请求方法的字典都会与已设置会话层数据合并。方法层的参数覆盖会话的参数。
+不过需要注意，就算使用了会话，方法级别`(函数参数)`的参数也不会被跨请求保持。
+
+如果你要手动为会话添加 `cookie`，就使用 [Cookie utility](http://docs.python-requests.org/zh_CN/latest/api.html#api-cookies) 函数 来操纵 `Session.cookies`。
+
+### 4.3 `Ip`代理池
+
+```python
+proxies = {
+  "http": "http://10.10.1.10:3128",
+  "https": "http://10.10.1.10:1080",
+}
+
+requests.get("http://example.org", proxies=proxies)
+```
+
 ## 存储模块
 
 ### 5.1 存储文件
@@ -261,3 +286,8 @@ i = Image.open(BytesIO(r.content))
 `说明：` 以请求返回的二进制数据`r.content`创建一张图片，你可以使用如上代码
 
 ![ba93659578d934af93a9411dd6735931.gif](https://i.loli.net/2019/01/28/5c4f0f52a4f45.gif)
+
+## 参考链接
+
+1. [**request basic**](http://docs.python-requests.org/zh_CN/latest/user/quickstart.html)
+2. [**request advanced**](http://docs.python-requests.org/zh_CN/latest/user/advanced.html#advanced)
