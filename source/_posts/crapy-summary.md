@@ -285,9 +285,10 @@ i = Image.open(BytesIO(r.content))
 
 `说明：` 以请求返回的二进制数据`r.content`创建一张图片，你可以使用如上代码
 
-### 6.2 实时显示下载进度
+### 6.2 实时显示下载进度及下载时间
 
 ```python
+import requests
 from contextlib import closing
 
 class ProgressBar(object):
@@ -319,15 +320,21 @@ class ProgressBar(object):
         print(self.__get_info(), end=end_str)
 
 def download_progress():
+    start=time.time()
     with closing(requests.get("https://i.imgur.com/YjVeqM9h.jpg", stream=True)) as response:
         chunk_size = 1024
         content_size = int(response.headers['content-length'])
-        progress = ProgressBar("razorback", total=content_size, unit="KB", chunk_size=chunk_size, run_status="正在下载", fin_status="下载完成")
+        progress = ProgressBar("downloading", total=content_size, unit="KB", chunk_size=chunk_size, run_status="正在下载", fin_status="下载完成")
         # chunk_size = chunk_size < content_size and chunk_size or content_size
         with open('./file.mp3', "wb") as file:
             for data in response.iter_content(chunk_size=chunk_size):
                 file.write(data)
                 progress.refresh(count=len(data))
+    end=time.time()
+    print("time costs {:.3f} secs".format(end-start))
+
+if __name__ == '__main__':
+    download_progress()
 ```
 
 ![ba93659578d934af93a9411dd6735931.gif](https://i.loli.net/2019/01/28/5c4f0f52a4f45.gif)
