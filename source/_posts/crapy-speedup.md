@@ -8,7 +8,7 @@ tags: [python]
 # (二) 让爬虫飞起来(`crapy-speedup`)
 
 - 多线程 `multithreading`$\to$`threading`库
-- 多进程 `multiprocess`
+- 多进程 `multiprocess` `concurrent.futures`
 - 协程 `gevent`
 - 异步 `asyio`
 
