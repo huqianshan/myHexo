@@ -8,7 +8,7 @@ tags: [Script,Python]
 ### 涉及登录，查分，抢课等功能
 
 
-
+<!--more-->
 ---
 
  - `import uestc`  *导入文件*

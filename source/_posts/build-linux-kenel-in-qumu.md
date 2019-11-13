@@ -5,7 +5,7 @@ tags: [linux,drivers]
 ---
 
 # 在`QEMU`中运行编译的`Linux`内核
-
+<!--more-->
 ## 内核编译脚本 `build.sh`
 
 ```shell
