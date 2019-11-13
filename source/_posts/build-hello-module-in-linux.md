@@ -1,0 +1,48 @@
+---
+title: build-hello-module-in-linux
+date: 2019-11-13 10:49:12
+tags: [linux,module]
+---
+
+# 编译简单的`linux`内核模块
+<!--more-->
+## `hello.c`
+
+```c
+/*
+ * a simple kernel module: hello
+ *
+ * Copyright (C) 2014 Barry Song  (baohua@kernel.org)
+ *
+ * Licensed under GPLv2 or later.
+ */
+
+#include <linux/init.h>
+#include <linux/module.h>
+
+static int __init hello_init(void)
+{
+	printk(KERN_INFO "Hello World in hjl's linux\n");
+	return 0;
+}
+module_init(hello_init);
+
+static void __exit hello_exit(void)
+{
+	printk(KERN_INFO "Hello World exit byebye\n ");
+}
+module_exit(hello_exit);
+
+MODULE_AUTHOR("Hu Jinlei <hjl2016060203025@std.uestc.edu.cn>");
+MODULE_LICENSE("GPL v2");
+MODULE_DESCRIPTION("A simple Hello World Module");
+MODULE_ALIAS("a simplest module");
+```
+
+1. 编译
+2. `insmod ./hello.ko`加载
+3. `rmmod hello`卸载
+4. `lsmod`显示加载的模块
+
+
+![03-arm-linux-module.jpg](https://i.loli.net/2019/11/13/1zoMHxPZeOBiFSr.jpg)
