@@ -38,6 +38,6 @@ sudo umount extra/img
 
 - 它会自动编译内核模块并安装到`vexprees.img`
 
-## 启动带`LCD`的`ARM Linux`内核
+## 启动带`LCD`的`ARM Linux`内 核
 
 ![01-arm-linux-qemu-lcd.jpg](https://i.loli.net/2019/11/13/RV1HtyCN2Y3OPsW.jpg)
