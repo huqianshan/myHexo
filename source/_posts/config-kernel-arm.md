@@ -5,7 +5,9 @@ tags: [linux,drivers]
 ---
 
 # `linux` 内核的配置
+
 <!--more-->
+
 ## 四种打开方式
 
 - `make config`
