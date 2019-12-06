@@ -3,7 +3,21 @@ title: create-chardevice
 date: 2019-11-15 20:16:33
 tags: [linux,drivers]
 ---
+<!-- TOC -->
 
+- [`linux`字符设备驱动设计与实现](#linux字符设备驱动设计与实现)
+    - [`TDLCD(Test Device For Linux Char Drives)`的设计](#tdlcdtest-device-for-linux-char-drives的设计)
+    - [`TDLCD`实现步骤](#tdlcd实现步骤)
+    - [结构设计](#结构设计)
+        - [模块部分](#模块部分)
+        - [宏定义及头文件](#宏定义及头文件)
+        - [字符设备结构设计](#字符设备结构设计)
+        - [`file_operations`结构设计](#file_operations结构设计)
+        - [字符设备模块的加载与卸载函数](#字符设备模块的加载与卸载函数)
+    - [`Makefile`](#makefile)
+    - [编译装载结果](#编译装载结果)
+
+<!-- /TOC -->
 ## `linux`字符设备驱动设计与实现
 
 ### `TDLCD(Test Device For Linux Char Drives)`的设计

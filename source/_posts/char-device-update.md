@@ -3,7 +3,23 @@ title: char-device-update
 date: 2019-11-20 09:20:12
 tags: [drivers]
 ---
+<!-- TOC -->
 
+- [字符设备的改进](#字符设备的改进)
+    - [增加并发 解决竞态](#增加并发-解决竞态)
+        - [可用技术方案](#可用技术方案)
+        - [情况分析](#情况分析)
+    - [阻塞操作 `wait-queue`](#阻塞操作-wait-queue)
+    - [轮询操作 `select,poll,epoll`](#轮询操作-selectpollepoll)
+        - [应用程序中的`select`函数](#应用程序中的select函数)
+        - [`poll`函数](#poll函数)
+    - [异步通知及异步`IO`](#异步通知及异步io)
+    - [异步`I/O`](#异步io)
+    - [中断与定时器](#中断与定时器)
+        - [[一个基于软中断的秒设备](https://github.com/huqianshan/OperatingSystemAndCompiler/blob/master/drivers/second/second.c)](#一个基于软中断的秒设备httpsgithubcomhuqianshanoperatingsystemandcompilerblobmasterdriverssecondsecondc)
+    - [内存映射](#内存映射)
+
+<!-- /TOC -->
 ## 字符设备的改进
 
 <!--more-->

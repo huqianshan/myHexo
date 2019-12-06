@@ -2,20 +2,27 @@
 layout: poster
 title: Modern art
 date: 2019-01-17 13:59:37
-tags: Coursera
+tags: [Coursera]
 ---
-# 透过摄影观看世界(From The Museum of Modern Art) ----New York Modern Art Museum
+<!-- TOC -->
 
-![dd](http://www.k11artfoundation.org/wp-content/uploads/MoMA_web-banner_R3.jpg)
+- [透过摄影观看世界(From The Museum of Modern Art) ----New York Modern Art Museum](#透过摄影观看世界from-the-museum-of-modern-art-----new-york-modern-art-museum)
+    - [课程导言](#课程导言)
+    - [**课程目的**: 通过介绍影响摄影作品的创意、手段与技术，讨论观看照片与真正理解照片之间距离的问题。](#课程目的-通过介绍影响摄影作品的创意手段与技术讨论观看照片与真正理解照片之间距离的问题)
+    - [**学习目标**](#学习目标)
 
-## 课程导言
+<!-- /TOC -->
+
+## 透过摄影观看世界(From The Museum of Modern Art) ----New York Modern Art Museum
+
+### 课程导言
 对于我们中的许多人来说，虽然拍照、分享和浏览照片已经成了日常生活中的习惯，但我们与图像的频繁接触并未培养我们在视觉表达上的素养。
 <!--more-->
 
-**课程目的**: 通过介绍影响摄影作品的创意、手段与技术，讨论观看照片与真正理解照片之间距离的问题。
+### **课程目的**: 通过介绍影响摄影作品的创意、手段与技术，讨论观看照片与真正理解照片之间距离的问题。
 
 
-**学习目标** 
+### **学习目标** 
  - 训练技巧，以便更好地检视和理解照片与摄影图像之间的区别。
  - 发现情境如何影响摄影图像的制作、传播和接收。
  - 学习摄影中各种不同模式的艺术和技术试验和创新。

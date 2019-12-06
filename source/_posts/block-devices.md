@@ -24,6 +24,7 @@ tags: [drivers]
 
 - 块设备驱动
 
+<!--more-->
 ### 块设备驱动结构
 
 #### `block_device_operation`结构体

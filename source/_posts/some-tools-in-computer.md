@@ -4,7 +4,17 @@ title: some_tools_in_computer
 date: 2019-02-14 12:29:06
 tags: [tools]
 ---
+<!-- TOC -->
 
+- [龙套角色也精彩](#龙套角色也精彩)
+    - [`Linux’s Tools`](#linuxs-tools)
+        - [`Make & Makefile`](#make--makefile)
+            - [makefile的规则。](#makefile的规则)
+            - [`参考链接：`](#参考链接)
+        - [`dd命令`](#dd命令)
+            - [`参考链接`](#参考链接)
+
+<!-- /TOC -->
 # 龙套角色也精彩
 
 这是学习[操作系统]()时总结的一些编程开发工具，虽然这些并不是实实在在的

@@ -4,12 +4,10 @@ title: auto-google-translation
 date: 2019-02-15 09:57:53
 tags: [python,script]
 ---
-
-# 字幕也疯狂
+## 字幕也疯狂
 
 `观曲千首 不如操琴一曲` 试着做一个勤劳的字幕组小员工~
 
-<img src="https://img1.doubanio.com/view/subject/l/public/s28051018.jpg" width="100" height="100%">
 
 <!--more-->
 

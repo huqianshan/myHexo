@@ -4,13 +4,26 @@ title: python-advanced
 date: 2019-01-31 19:46:38
 tags: [python]
 ---
+<!-- TOC -->
 
+- [`Python`的高级烹饪方法](#python的高级烹饪方法)
+    - [给函数添加一个装饰器](#给函数添加一个装饰器)
+        - [`需求`](#需求)
+        - [`解决方法`](#解决方法)
+        - [`说明`](#说明)
+        - [参考链接](#参考链接)
+    - [`with`语句和`ContexManager`上下文管理器](#with语句和contexmanager上下文管理器)
+        - [上下文管理器 `Context Manager`](#上下文管理器-context-manager)
+        - [`with`语法](#with语法)
+        - [实例：自定义文件打开类](#实例自定义文件打开类)
+        - [内置库`contextlib`](#内置库contextlib)
+        - [参考链接](#参考链接-1)
+
+<!-- /TOC -->
 # `Python`的高级烹饪方法
 
 - 装饰器
 - `with`语句和`ContexManager`上下文管理器
-
-<img src="https://i.loli.net/2019/01/31/5c52e16861ba4.jpg" width="20%" height="20%">
 
 <!--more-->
 

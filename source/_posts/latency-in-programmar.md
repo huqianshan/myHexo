@@ -4,9 +4,17 @@ title: latency-in-programmar
 date: 2019-02-11 19:47:46
 tags: [tips]
 ---
+<!-- TOC -->
+
+- [Latency Comparison Numbers (~2012)](#latency-comparison-numbers-2012)
+    - [Notes](#notes)
+    - [Credit](#credit)
+    - [Contributions](#contributions)
+
+<!-- /TOC -->
 # Latency Comparison Numbers (~2012)
 
-<img src="https://i.loli.net/2019/02/11/5c6161e41f278.jpg" width="40%" height="40%">
+
 
 <!--more-->
 | **Name**                           |             |    |         |    |     |    |                             |
