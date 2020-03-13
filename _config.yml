@@ -8,7 +8,8 @@ subtitle: Nothing
 description: For Nothing 
 author: hjl
 email: hjl1999@qq.com
-keywords: "student"
+keywords: 
+  - student
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -16,24 +17,27 @@ url: https://huqianshan.github.io
 root: /
 #permalink: :year/:month/:day/:title/
 #amber
-permalink: articles/:title/
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-#code_dir: downloads/code
+permalink: :title/ 
 permalink_defaults:
+  lang: en
 
 # Directory
 source_dir: source
 public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+#code_dir: downloads/code
 
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
-filename_case: 0
-render_drafts: false
+external_link.enable: true
+
+filename_case: 2
+render_drafts: true
 post_asset_folder: false
 relative_link: false
 highlight:                                                                                                                                                                                                   
@@ -41,6 +45,14 @@ highlight:
   auto_detect: true                                                                                                                                                                                          
   line_number: true                                                                                                                                                                                          
   tab_replace: ''
+
+markdown_it_plus:
+  plugins:
+    - plugin:
+      name: "@neilsustc/markdown-it-katex"
+      enable: true
+      options:
+        strict: true
 
 # Category & Tag
 default_category: uncategorized
@@ -86,7 +98,7 @@ pagination_dir: page
 #  - hexo-generator-baidu-sitemap
 #  - hexo-generator-sitemap
 
-theme: amber
+theme: melody
 exclude_generator:
 
 # Deployment
@@ -110,7 +122,7 @@ deploy:
 sitemap:
     path: sitemap.xml
 baidusitemap:
-    path: baidusitemap.xm
+    path: baidusitemap.xml
 
 feed:
     type: atom
@@ -132,7 +144,7 @@ jsonContent:
     updated: false
     comments: false
     link: false
-    permalink: false
+    permalink: true
     excerpt: false
     categories: false
     tags: true

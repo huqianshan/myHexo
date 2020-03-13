@@ -1,25 +1,28 @@
 ---
 layout: poster
-title: python-advanced
-date: 2019-01-31 19:46:38
-tags: [python]
+title: Python的高级烹饪方法
+date: 2020-01-31 19:46:38
+tags: 
+- python
 ---
 <!-- TOC -->
 
 - [`Python`的高级烹饪方法](#python的高级烹饪方法)
-    - [给函数添加一个装饰器](#给函数添加一个装饰器)
-        - [`需求`](#需求)
-        - [`解决方法`](#解决方法)
-        - [`说明`](#说明)
-        - [参考链接](#参考链接)
-    - [`with`语句和`ContexManager`上下文管理器](#with语句和contexmanager上下文管理器)
-        - [上下文管理器 `Context Manager`](#上下文管理器-context-manager)
-        - [`with`语法](#with语法)
-        - [实例：自定义文件打开类](#实例自定义文件打开类)
-        - [内置库`contextlib`](#内置库contextlib)
-        - [参考链接](#参考链接-1)
+  - [给函数添加一个装饰器](#给函数添加一个装饰器)
+    - [`需求`](#需求)
+    - [`解决方法`](#解决方法)
+    - [`说明`](#说明)
+    - [定义一个带参数的装饰器](#定义一个带参数的装饰器)
+    - [参考链接](#参考链接)
+  - [`with`语句和`ContexManager`上下文管理器](#with语句和contexmanager上下文管理器)
+    - [上下文管理器 `Context Manager`](#上下文管理器-context-manager)
+    - [`with`语法](#with语法)
+    - [实例：自定义文件打开类](#实例自定义文件打开类)
+    - [内置库`contextlib`](#内置库contextlib)
+    - [`pep`参考链接](#pep参考链接)
 
 <!-- /TOC -->
+
 # `Python`的高级烹饪方法
 
 - 装饰器
@@ -73,6 +76,41 @@ countdown = timethis(countdown)
 
 装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。概括的讲，装饰器的作用就是为已经存在的对象添加额外的功能。
 
+### 定义一个带参数的装饰器
+
+```python
+from functools import wraps
+import logging
+
+def logged(level, name=None, message=None):
+    """
+    Add logging to a function. level is the logging
+    level, name is the logger name, and message is the
+    log message. If name and message aren't specified,
+    they default to the function's module and name.
+    """
+    def decorate(func):
+        logname = name if name else func.__module__
+        log = logging.getLogger(logname)
+        logmsg = message if message else func.__name__
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            log.log(level, logmsg)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorate
+
+# Example use
+@logged(logging.DEBUG)
+def add(x, y):
+    return x + y
+
+@logged(logging.CRITICAL, 'example')
+def spam():
+    print('Spam!')
+```
+
 ### 参考链接
 
 - [python-cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p01_put_wrapper_around_function.html)
@@ -102,9 +140,9 @@ with EXPR as VAR:
 
 （5）最后调用上下文管理器中的的__exit__方法。
 
-（6）__exit__方法有三个参数：exc_type, exc_val, exc_tb。如果代码块BLOCK发生异常并退出，那么分别对应异常的type、value 和 traceback。否则三个参数全为None。
+（6）`__exit__`方法有三个参数：`exc_type, exc_val, exc_tb`。如果代码块BLOCK发生异常并退出，那么分别对应异常的`type、value` 和 `traceback`。否则三个参数全为None。
 
-（7）__exit__方法的返回值可以为True或者False。如果为True，那么表示异常被忽视，相当于进行了try-except操作；如果为False，则该异常会被重新raise。
+（7）`__exit__`方法的返回值可以为True或者False。如果为True，那么表示异常被忽视，相当于进行了`try-except`操作；如果为False，则该异常会被重新raise。
 
 ### 实例：自定义文件打开类
 
@@ -141,7 +179,7 @@ with MyOpen("python_base.py") as file_in:
 
 ### 内置库`contextlib`
 
-Python提供内置的contextlib库，使得上线文管理器更加容易使用。其中包含如下功能：
+Python提供内置的contextlib库，使得上下文管理器更加容易使用。其中包含如下功能：
 
 1. 装饰器contextmanager。该装饰器将一个函数中yield语句之前的代码当做__enter__方法执行，yield语句之后的代码当做__exit__方法执行。同时yield返回值赋值给as后的变量。
 
@@ -164,7 +202,7 @@ with open_func('python_base.py') as file_in:
         print(line)
 ```
 
-2. closing类。该类会自动调用传入对象的close方法。使用实例如下：
+2.`closing`类。该类会自动调用传入对象的`close`方法。使用实例如下：
 
 ```python
 class MyOpen2(object):
@@ -195,8 +233,8 @@ class closing(object):
         self.thing.close()
 ```
 
-closing类的__exit__方法自动调用传入的thing的close方法。
+`closing`类的`__exit__`方法自动调用传入的thing的`close`方法。
 
-### 参考链接
+### `pep`参考链接
 
 - [python-dev](https://www.python.org/dev/peps/pep-0343/)

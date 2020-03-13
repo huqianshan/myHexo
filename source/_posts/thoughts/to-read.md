@@ -7,9 +7,8 @@ tags: [thoughts]
 ## 书签
 
 [NVM一致性](https://blog.csdn.net/Meditator_hkx/article/details/53106881)
-
-## 分类
 <!--more-->
+## 分类
 
 ### 模拟器
 
