@@ -1,22 +1,15 @@
 ---
 layout: poster
-title: Objected-Pattern
+title: 设计模式Desgin-Pattern
 date: 2020-03-06 11:43:53
 tags:
 - Pattern
 ---
 
-## 策略模式 `Strategy Pattern`
+## 相关资料
 
-$$\begin{array}{c}
+- [维基百科](https://www.wikiwand.com/zh-hans/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA))
 
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+- [`Python-Pattern-Implement`](https://github.com/wklken/py-patterns)
 
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}$$
-
-$\sqrt{3x-1}+(1+x)^2$
+- [`Pythonic-Pattern`](https://github.com/faif/python-patterns)
