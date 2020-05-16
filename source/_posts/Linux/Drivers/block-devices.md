@@ -1,51 +1,12 @@
 ---
 title: block-drivers-devices
 date: 2019-11-23 14:47:42
-tags: [drivers]
+tags: 
+- [drivers]
 ---
 
 ## 块驱动设备
 
-<!-- TOC -->
-
-- [块驱动设备](#块驱动设备)
-  - [与字符驱动设备对比](#与字符驱动设备对比)
-  - [访问存储介质的架构](#访问存储介质的架构)
-    - [`I/O`调度器](#io调度器)
-  - [存储结构的划分](#存储结构的划分)
-  - [块设备驱动核心结构](#块设备驱动核心结构)
-    - [`block_device`](#block_device)
-    - [`gendisk`](#gendisk)
-    - [`hd_struct`](#hd_struct)
-    - [`block_device_operations`](#block_device_operations)
-    - [`request_queue`](#request_queue)
-    - [`request`](#request)
-    - [`bio`](#bio)
-    - [`bio_vec`](#bio_vec)
-    - [`bio_iter`](#bio_iter)
-  - [块设备核心方法](#块设备核心方法)
-  - [3.16版本源代码](#316版本源代码)
-    - [`block_device`原型](#block_device原型)
-    - [`gendisk`原型](#gendisk原型)
-    - [`hd_struct`磁盘分区描述](#hd_struct磁盘分区描述)
-    - [`block_device_operations`原型](#block_device_operations原型)
-    - [`request_queue`原型](#request_queue原型)
-    - [`request`原型](#request原型)
-    - [`bio`原型](#bio原型)
-    - [`bio_vec bio_iter`](#bio_vec-bio_iter)
-    - [遍历函数](#遍历函数)
-  - [测试步骤](#测试步骤)
-  - [`API`的更改](#api的更改)
-    - [`__bio_kmap_atomic` 被删除](#__bio_kmap_atomic-被删除)
-    - [`struct request`中 `cmd_type`被删除](#struct-request中-cmd_type被删除)
-    - [`bio_rw` has been removed](#bio_rw-has-been-removed)
-    - [`blk_queue_bounce_limit(BLK_BOUNCE_ANY)`](#blk_queue_bounce_limitblk_bounce_any)
-    - [`blk_queue_ordered()` changed](#blk_queue_ordered-changed)
-    - [`struct bio` changed some values](#struct-bio-changed-some-values)
-  - [`样例块驱动代码`](#样例块驱动代码)
-  - [参考链接](#参考链接)
-
-<!-- /TOC -->
 <!--more-->
 ### 与字符驱动设备对比
 
@@ -81,12 +42,22 @@ tags: [drivers]
 
 - `CFQ I/O`为所有任务分配均匀的`I/O`带宽。
 
-- > `kernel elevator=deadline`
+- 改变内核调度算法
 
-    内核传参改变调度算法
+    - 内核传参改变调度算法 `kernel elevator=deadline`
 
-- > `echo SCHEDULER > /sys/block/DEVICE/queue/scheduler`
-    使用如下命令改变内核调度算法
+    - 使用如下命令改变内核调度算法 `echo SCHEDULER > /sys/block/DEVICE/queue/scheduler`
+
+### 设备文件与普通文件的区别
+
+- 概念上
+    - `普通文件`: 文本，可执行程序、媒体文件等常规文件
+    - `设备文件`: 就是I/O设备。如挂载在内核`/dev`上的设备，也能通过文件系统读写。
+        - 类unix操作系统都是基于文件概念的，文件是由字节序列而构成的信息载体。那么就可以把`设备文件`当作`可读写的I/O设备`。
+        - 设备文件通常分为`字符设备`、`块设备`、`网络设备`
+- 寻址空间上
+    - 普通文件: 内核虚拟地址空间，普通文件比块设备文件多一层文件系统的地址转换机构。
+    - 设备文件：物理寻址空间
 
 ### 存储结构的划分
 
@@ -103,14 +74,17 @@ tags: [drivers]
     块：逻辑上进行数据存储的最小单位。
 
     逻辑块的大小是在格式化的时候确定的, 一个 `Block` 最多仅能容纳一个文件（即不存在多个文件同一个`Block`的情况.
-    **`Block`是`VFS`和文件系统传送数据的基本单位**
-    - Linux内核要求 `Block_Size = Sector_Size * $$2^n$$`，并且`Block_Size <= 内存的Page_Size(页大小）`
-    - 块设备文件的每次读或写操作是一种"原始"访问，因为它绕过了磁盘文件系统，内核通过使用最大的块`(4096)`执行该操作。
+    - **`Block`是`VFS`和文件系统传送数据的基本单位**
+        - Linux内核要求 `Block_Size = Sector_Size *`$$2^n$$，并且`Block_Size <= 内存的Page_Size(页大小）`
+        - block对应磁盘上的一个或多个相邻的扇区，而`VFS`将其看成是一个单一的数据单元.
+    - 块设备的`block`
+        - 块设备的block的大小不是唯一的，创建一个磁盘文件系统时，管理员可以选择合适的扇区的大小，同一个磁盘的几个分区可以使用不同的块大小。
+        - 块设备文件的每次读或写操作是一种"原始"访问，**因为它绕过了磁盘文件系统**，内核通过使用最大的块`(4096)`执行该操作。
 
 - `Sector`
-    扇区：硬件设备存储数据的基本单位
+    扇区：硬件`I/O`设备存储数据的基本单位
 
-    这个Sector就是512byte，和物理设备上的概念不一样，如果实际的设备的sector不是512byte，而是4096byte(eg SSD)，那么只需要将多个内核sector对应一个设备sector即可
+    这个Sector就是`512byte`，和实际物理存储介质设备上的概念不一样。如果实际的设备的sector不是512byte，而是4096byte(eg SSD)，那么只需要将多个内核sector对应一个ssd sector即可
 
 ### 块设备驱动核心结构
 
@@ -441,8 +415,7 @@ struct bio
  28         unsigned int    bv_offset;
  29 };  
  31 struct bvec_iter {
- 32         sector_t                bi_sector;      /* device address in 512 byt
- 33                                                    sectors */
+ 32         sector_t                bi_sector;      /* device address in 512 bytess  ectors */
  34         unsigned int            bi_size;        /* residual I/O count */
  35 
  36         unsigned int            bi_idx;         /* current index into bvl_ve
@@ -452,7 +425,7 @@ struct bio
  40 };
 ```
 
-```txt
+```txt  
 struct bio_vec
 --26-->描述的page
 --27-->描述的长度
@@ -475,6 +448,8 @@ struct bio_vec
 ```
 
 ### 测试步骤
+
+源代码可参考[`sbull`一个ramdisk块设备实现](https://github.com/duxing2007/ldd3-examples-3.x/tree/master/sbull)
 
 > 接下来即可进行测试
 >

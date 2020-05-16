@@ -1,7 +1,9 @@
 ---
 title: to-read-NVM
 date: 2019-12-06 19:50:45
-tags: [thoughts]
+tags: 
+-[thoughts]
+top: True
 ---
 
 ## 书签
@@ -43,3 +45,31 @@ tags: [thoughts]
 - [从内核视角看文件读写过程](https://www.cnblogs.com/huxiao-tee/p/4657851.html)
 
 - [页缓存和地址空间](https://www.lenzhao.com/topic/5a29facc2e95f0fd0a9818ab)
+
+#### `Debug`
+
+- [linux调试](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/strace.html)
+
+- 宋宝华LLD3
+
+#### 多线程
+
+##### 自旋锁
+
+[浅谈spinlock的实现 ](http://liujunming.top/2020/01/20/%E6%B5%85%E8%B0%88spinlock/)
+
+### 计算机体系结构
+
+#### `NUMA`
+
+- [深挖NUMA](https://zhuanlan.zhihu.com/p/33621500)
+
+NUMA: Non-Uniform-Memory-Access;每个cpu有自己的内存，不同内存之间通过QPI总线访问。远程访问带来性能问题
+
+### 数据结构
+
+- [Linux内核中的数据结构与算法](https://www.cnblogs.com/arnoldlu/p/6695451.html)
+
+- [stackexchange](https://cstheory.stackexchange.com/questions/19759/core-algorithms-deployed)
+
+- [中文翻译](https://linux.cn/article-2317-1.html)

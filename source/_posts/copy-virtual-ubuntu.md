@@ -53,3 +53,22 @@ tags: [linux,vmware,network]
 - [手动生成`eth0`以及`mac`配置文件](https://blog.csdn.net/gw85047034/article/details/50978490)
 
 - [虚拟机移动后`uuid`不匹配问题](https://blog.51cto.com/bfe99/900977)
+
+
+# `linux` 内核的配置
+
+<!--more-->
+
+## 四种打开方式
+
+- `make config`
+
+- `make menuconfig`
+
+- `make xconfig`
+
+- `make gconfig`
+
+`menuconfig` 如下所示
+
+![01-arm-linux-qemu-lcd.jpg](https://i.loli.net/2019/11/13/RV1HtyCN2Y3OPsW.jpg)

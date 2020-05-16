@@ -54,6 +54,11 @@ markdown_it_plus:
       options:
         strict: true
 
+search:
+  path: search.xml
+  field: post
+  content: true
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -73,7 +78,7 @@ tag: 2
 ## http://www.senchalabs.org/connect/logger.html
 port: 4000
 server_ip: localhost
-logger: false
+logger: true
 logger_format: dev
 
 # Date / Time format

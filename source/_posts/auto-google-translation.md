@@ -8,7 +8,6 @@ tags: [python,script]
 
 `观曲千首 不如操琴一曲` 试着做一个勤劳的字幕组小员工~
 
-
 <!--more-->
 
 ```python

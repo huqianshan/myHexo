@@ -137,3 +137,25 @@ avg(1)
 avg(3)
 
 # %%
+import random
+
+SEED = 448
+
+myList = ['list', 'elements', 'go', 'here']
+random.seed(SEED)
+n=random.sample(myList,2)
+
+print(n)
+
+
+# %%
+
+
+# %%
+
+
+# %%
+# %%
+pattern=r"IPIP数据：[\d\.]+\-[\d\.]+\s(\w+)\s(\w+)\s(\w+)\s"
+t=re.search(pattern,text)
+print(t.groups())
