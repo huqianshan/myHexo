@@ -2,8 +2,7 @@
 title: to-read-NVM
 date: 2019-12-06 19:50:45
 tags: 
--[thoughts]
-top: True
+- thoughts
 ---
 
 ## 书签

@@ -23,20 +23,20 @@ tags:
 
 <!-- /TOC -->
 
-# `Python`的高级烹饪方法
+# 1. `Python`的高级烹饪方法
 
 - 装饰器
 - `with`语句和`ContexManager`上下文管理器
 
 <!--more-->
 
-## 给函数添加一个装饰器
+## 1.1. 给函数添加一个装饰器
 
-### `需求`
+### 1.1.1. `需求`
 
 你想在函数上添加一个包装器，增加额外的操作处理(比如日志、计时等)。
 
-### `解决方法`
+### 1.1.2. `解决方法`
 
 如果你想使用额外的代码包装一个函数，可以定义一个装饰器函数，例如：
 
@@ -58,7 +58,7 @@ def timethis(func):
     return wrapper
 ```
 
-### `说明`
+### 1.1.3. `说明`
 
 一个装饰器就是一个函数，它接受一个函数作为参数并返回一个新的函数。
 
@@ -76,7 +76,7 @@ countdown = timethis(countdown)
 
 装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。概括的讲，装饰器的作用就是为已经存在的对象添加额外的功能。
 
-### 定义一个带参数的装饰器
+### 1.1.4. 定义一个带参数的装饰器
 
 ```python
 from functools import wraps
@@ -111,17 +111,17 @@ def spam():
     print('Spam!')
 ```
 
-### 参考链接
+### 1.1.5. 参考链接
 
 - [python-cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p01_put_wrapper_around_function.html)
 
-## `with`语句和`ContexManager`上下文管理器
+## 1.2. `with`语句和`ContexManager`上下文管理器
 
-### 上下文管理器 `Context Manager`
+### 1.2.1. 上下文管理器 `Context Manager`
 
 上下文管理器是指在一段代码执行之前执行一段代码，用于一些预处理工作；执行之后再执行一段代码，用于一些清理工作。比如打开文件进行读写，读写完之后需要将文件关闭。又比如在数据库操作中，操作之前需要连接数据库，操作之后需要关闭数据库。在上下文管理协议中，有两个方法`__enter__`和`__exit__`，分别实现上述两个功能
 
-### `with`语法
+### 1.2.2. `with`语法
 
 ```python
 with EXPR as VAR:
@@ -144,7 +144,7 @@ with EXPR as VAR:
 
 （7）`__exit__`方法的返回值可以为True或者False。如果为True，那么表示异常被忽视，相当于进行了`try-except`操作；如果为False，则该异常会被重新raise。
 
-### 实例：自定义文件打开类
+### 1.2.3. 实例：自定义文件打开类
 
 ```python
 # 自定义打开文件操作
@@ -177,7 +177,7 @@ with MyOpen("python_base.py") as file_in:
 # 代码块中主动引发一个除零异常，但整个程序不会引发异常
 ```
 
-### 内置库`contextlib`
+### 1.2.4. 内置库`contextlib`
 
 Python提供内置的contextlib库，使得上下文管理器更加容易使用。其中包含如下功能：
 
@@ -235,6 +235,6 @@ class closing(object):
 
 `closing`类的`__exit__`方法自动调用传入的thing的`close`方法。
 
-### `pep`参考链接
+### 1.2.5. `pep`参考链接
 
 - [python-dev](https://www.python.org/dev/peps/pep-0343/)

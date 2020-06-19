@@ -9,8 +9,13 @@ tags:
 - [`Python`高级用法目录](#python高级用法目录)
   - [`Built-in Objects`语义部分](#built-in-objects语义部分)
     - [双值交换](#双值交换)
-    - [切片与容器](#切片与容器)
+    - [容器](#容器)
+    - [元组拆包](#元组拆包)
+    - [容器的选择](#容器的选择)
+      - [数组`array.array`](#数组arrayarray)
+      - [内存视图（`memoryview`）](#内存视图memoryview)
   - [函数式编程与高阶函数](#函数式编程与高阶函数)
+      - [双向队列以及其他形式的队列](#双向队列以及其他形式的队列)
     - [迭代器](#迭代器)
     - [生成器 `yield`](#生成器-yield)
     - [`lambda map(func, *iterables) fileter`等](#lambda-mapfunc-iterables-fileter等)
@@ -38,11 +43,101 @@ a,b=b,a
 a,b,c=['a','b','c']
 ```
 
-#### 切片与容器
+#### 容器
 
-切片： `[begin:end:len]`
+切片(slice):
+
+- 切片： `[begin:end:len]` 左开右闭原则；Python 会调用
+`seq.__getitem__(slice(start, stop, step))`。
+
+- 多维切片: 如果要得到 `a[i, j]` 的值，Python 会调用 `a.__getitem__((i, j))`。
+
+  - NumPy 中，`...` 用作多维数组切片的快捷方式。如果 x 是四维数组，那
+么` x[i, ...]` 就是 `x[i, :, :, :]` 的缩写
+
+容器：
+
+- 容器序列：`list、tuple 和 collections.deque` 这些序列能存放不同类型的
+数据
+
+- 扁平序列: `str、bytes、bytearray、memoryview 和 array.array`这类
+序列只能容纳一种类型
+
+容器序列存放的是它们所包含的任意类型的对象的引用，而扁平序列
+里存放的是值而不是引用
+
+序列
+
+- 可变序列 `list、bytearray、array.array、collections.deque  memoryview`
+
+- 不可变序列 `tuple、str 和 bytes`
+
+  - 序列的`*` 操作问题
+![sss](python_1_1_collections_abc.png)
+
+#### 元组拆包
+
+- 元组拆包可以应用到任何可迭代对象上
+
+- 用 `*` 来表示忽略多余的元素 `a,*_,c=s`
+
+  - 用 `*` 运算符把一个可迭代对象拆开作为函数的参数：`t = (20, 8);divmod(*t)`
+
+  - 用 `*` 处理剩下的元素,平行赋值 `a, b, *rest = range(5)`
+
+- 嵌套元组拆包
+
+```python
+for name, cc, pop, (latitude, longitude) in metro_areas:
+```
+
+#### 容器的选择
+
+##### 数组`array.array`
+
+- 更省空间，字节存储，而非`list`的对象存储
+
+- 数组支持所有跟可变序列有关的操作，包括 `.pop、.insert 和
+.extend`。另外，数组还提供从文件读取和存入文件的更快的方法，如
+`.frombytes` 和 `.tofile`
+
+- 创建数组需要一个类型码，用来表示在底层的 C 语言应该存放怎样的数据类型。
+比如 b 类型码代表的是有符号的字符（signed char），因此 array('b') 创建出的
+数组就只能存放一个字节大小的整数，范围从 -128 到 127，这样在序列
+很大的时候，我们能节省很多空间。
+
+- array.fromfile 从一个二进制文件里读出 1000 万个
+双精度浮点数只需要 0.1 秒，这比从文本文件里读取的速度要快 60
+倍，因为后者会使用内置的 float 方法把每一行文字转换成浮点数
+
+- 使用 array.tofile 写入到二进制文件，比以每行一个浮点数的
+方式把所有数字写入到文本文件要快 7 倍
+
+- 另外，1000 万个这样的数
+在二进制文件里只占用 80 000 000 个字节（每个浮点数占用 8 个字节，
+不需要任何额外空间），如果是文本文件的话，我们需要 181 515 739
+个字节。
+
+- 另外一个快速序列化数字类型的方法是使用
+pickle（https://docs.python.org/3/library/pickle.html)模
+块。pickle.dump 处理浮点数组的速度几乎跟 array.tofile 一
+样快。不过前者可以处理几乎所有的内置数字类型，包含复数、嵌
+套集合，甚至用户自定义的类。
+
+##### 内存视图（`memoryview`）
+
+- `memoryview `是一个内置类，它能让用户在不复制内容的情况下操作同
+一个数组的不同切片
+
+- `memoryview.cast` 会把同一块内存里的内容打包
+成一个全新的 `memoryview` 对象给你。
 
 ### 函数式编程与高阶函数
+
+##### 双向队列以及其他形式的队列
+
+- 双向队列`collections.deque`是一个线程安全、可以快速从两
+端添加或者删除元素的数据类型。
 
 #### 迭代器
 
@@ -66,6 +161,10 @@ t = tuple(iterator)
 #t (1, 2, 3)
 ```
 
+生成器表达式背后遵守了迭代器协
+议，可以逐个地产出元素，而不是先建立一个完整的列表，然后再把这
+个列表传递到某个构造函数里。
+
 - [生成器表达式和列表推导式的参考链接](https://docs.python.org/zh-cn/3/howto/functional.html#generator-expressions-and-list-comprehensions)
 - [`doc-python-link`](https://docs.python.org/zh-cn/3/library/stdtypes.html#iterator-types)
 
@@ -76,6 +175,10 @@ t = tuple(iterator)
 毫无疑问，你已经对如何在 Python 和 C 中调用普通函数很熟悉了，这时候函数会获得一个创建局部变量的私有命名空间。当函数到达 return 表达式时，局部变量会被销毁然后把返回给调用者。之后调用同样的函数时会创建一个新的私有命名空间和一组全新的局部变量。但是，如果在退出一个函数时不扔掉局部变量会如何呢？如果稍后你能够从退出函数的地方重新恢复又如何呢？这就是生成器所提供的；他们可以被看成可恢复的函数。
 
 当你调用一个生成器函数，它并不会返回单独的值，而是返回一个支持生成器协议的生成器对象。当执行 yield 表达式时，生成器会输出 i 的值，就像 return 表达式一样。yield 和 return 最大的区别在于，到达 yield 的时候生成器的执行状态会挂起并保留局部变量。在下一次调用生成器 __next__() 方法的时候，函数会恢复执行。
+
+**Python 会忽略代码里 []、{} 和 () 中的换行**，因此如果你的代码里
+有多行的列表、列表推导、生成器表达式、字典这一类的，可以省
+略不太好看的续行符 \
 
 #### `lambda map(func, *iterables) fileter`等
 
